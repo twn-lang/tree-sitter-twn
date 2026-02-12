@@ -1,0 +1,243 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "twn",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_item"
+      }
+    },
+    "_item": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "label_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "instruction"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "syscall_arg"
+        }
+      ]
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": ";[^\\n]*"
+    },
+    "label_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        }
+      ]
+    },
+    "instruction": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "opcode_no_arg"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "opcode_with_arg"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "argument"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "opcode_jump"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "argument"
+            }
+          ]
+        }
+      ]
+    },
+    "argument": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "syscall_arg": {
+      "type": "SYMBOL",
+      "name": "argument"
+    },
+    "opcode_no_arg": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[sS][yY][sS][cC][aA][lL][lL]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[pP][oO][pP]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[dD][uU][pP]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][wW][aA][pP]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[aA][dD][dD]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][uU][bB]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[mM][uU][lL]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[dD][iI][vV]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[mM][oO][dD]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[fF][iI][nN]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][tT][oO][rR][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][oO][aA][dD]"
+        }
+      ]
+    },
+    "opcode_with_arg": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[pP][uU][sS][hH]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[aA][dD][dD][iI]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][uU][bB][iI]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[mM][uU][lL][iI]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[dD][iI][vV][iI]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[mM][oO][dD][iI]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[sS][tT][oO][rR][eE][iI]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][oO][aA][dD][iI]"
+        }
+      ]
+    },
+    "opcode_jump": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[jJ][zZ]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[jJ][mM][zZ]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[cC][aA][lL][lL]"
+        }
+      ]
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+    },
+    "number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\d+"
+        },
+        {
+          "type": "PATTERN",
+          "value": "0[xX][0-9a-fA-F]+"
+        }
+      ]
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}
