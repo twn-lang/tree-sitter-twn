@@ -153,6 +153,30 @@
         {
           "type": "PATTERN",
           "value": "[lL][oO][aA][dD]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[eE][qQ]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[nN][eE][qQ]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[gG][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[gG][eE]"
         }
       ]
     },

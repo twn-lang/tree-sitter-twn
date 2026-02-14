@@ -60,8 +60,14 @@ export default grammar({
         caseInsensitive("MOD"),
         caseInsensitive("RET"),
         caseInsensitive("FIN"),
-        caseInsensitive("STORE"), // STORE/LOADはスタック操作なので引数なし扱いも可能だが、文脈による
+        caseInsensitive("STORE"),
         caseInsensitive("LOAD"),
+        caseInsensitive("EQ"),
+        caseInsensitive("NEQ"),
+        caseInsensitive("LT"),
+        caseInsensitive("LE"),
+        caseInsensitive("GT"),
+        caseInsensitive("GE"),
       ),
 
     opcode_with_arg: ($) =>
